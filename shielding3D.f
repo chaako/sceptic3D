@@ -434,6 +434,8 @@ c             x(i=1)=0, that element doesn't affect the solution
      $        + epc(i,j)*(x(i,j,k+1)+x(i,j,k-1))
      $        - (fpc(i,j)+exp(phi(i,j,k)))*x(i,j,k)
             i=n1
+c           Below the x(i+1) really shouldn't appear, but hopefully it
+c             is zero and thus doesn't matter. Same goes for other ks.
             res(i,j,k) = bpc(i+1)*x(i+1,j,k)
      $        + apc(i-1)*x(i-1,j,k)
      $        + (dpc(i,j+1) + gpc(j+1,k,2)*apc(i))*x(i,j+1,k)
