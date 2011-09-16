@@ -64,8 +64,8 @@ makefile : Makefile configure
 	make -f $(MAKEFILE)
 
 accissum.html : accissum.tex
-	tth -e2 accissum
-	purge.tex
+#	tth -e2 accissum
+#	purge.tex
 
 #update the libraries.
 libaccis.a : $(object_files)

@@ -141,7 +141,7 @@ $(DIRHDF)/lib/libhdf5.a :
 
 # Other rules
 ./accis/libaccisX.a : ./accis/*.f
-	make -C accis
+	make -C accis libaccisX.a
 
 orbitint : orbitint.f coulflux.o $(OBJ) ./accis/libaccisX.a
 	$(G77) $(OPTCOMP) -o orbitint orbitint.f $(OBJ) coulflux.o $(LIB)
