@@ -31,8 +31,9 @@ c     Rank of dataset
 c     Working variables
       INTEGER :: i, j
       integer idf
-      REAL, DIMENSION(3,3) :: dset_data1
-      INTEGER, DIMENSION(3,3) :: dset_data2
+c     For debuggin(?):
+c      REAL, DIMENSION(3,3) :: dset_data1
+c      INTEGER, DIMENSION(3,3) :: dset_data2
 
 c Construct a filename that contains many parameters
 c   using the routines in strings_names.f
@@ -74,16 +75,21 @@ c     Turn on these when testing convergence with changing grid size
       call nameappendint(filename,'Np',npsiused,3)
       call nameappendint(filename,'s',maxsteps,5)
 
+c     When outputing one file per node need myid
+      if (lalloutput) then
+         call nameappendint(filename,'id',myid,3)
+      endif
+
       idf=nbcat(filename,'.h5')
 
 
-
-      do i = 1, 3
-           do j = 1, 3
-                dset_data1(i,j) = j*1.1;
-                dset_data2(i,j) = j;
-           end do
-      end do
+c     For debuggin(?):
+c      do i = 1, 3
+c           do j = 1, 3
+c                dset_data1(i,j) = j*1.1;
+c                dset_data2(i,j) = j;
+c           end do
+c      end do
 
 c Initialize FORTRAN interface.
       CALL h5open_f(error)
@@ -271,6 +277,9 @@ c     Variable arrays
       storage_dims(2) = npartmax
       call writehdfrealmat(group_id,dsetname,
      $  xp,storage_dims,data_dims,rank)
+
+c Disregard rest if slave and only storing particles
+      if (myid.gt.0 .and. lpartonly) goto 999
 
       dsetname = 'vzinit'
       rank = 1

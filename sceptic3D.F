@@ -161,6 +161,8 @@ c     drifting Maxwellian reinjection.
       orbinit=.false.
       lsubcycle=.false.
       lfulloutput=.false.
+      lalloutput=.false.
+      lpartonly=.false.
       verlet=.false.
       bohm=.false.
 c Signal that fvcom is not initialized. After initialization it is .ne.0
@@ -205,6 +207,10 @@ c        Check for end argument string...required since some MPI versions add th
          endif
          if(string(1:12) .eq. '--fulloutput')then
             lfulloutput=.true.
+         elseif(string(1:11) .eq. '--alloutput')then
+            lalloutput=.true.
+         elseif(string(1:10) .eq. '--partonly')then
+            lpartonly=.true.
          endif
 
          if(string(1:2) .eq. '-f') finaldiags=.false.
@@ -1150,11 +1156,13 @@ c        MPI sum distribution function diagnostic
       if(myid.eq.0)then
 c Write the output files.
          call output(dt,i-1,fave,icolntype,colnwt)
-#ifdef HDF
-         call outputhdf(dt,i-1,fave,icolntype,colnwt)
-#endif
          if (norbits.ge.1) call orbitoutput()
       endif
+#ifdef HDF
+      if(myid.eq.0 .or. lalloutput)then
+          call outputhdf(dt,i-1,fave,icolntype,colnwt)
+      endif
+#endif
       if(writepart) call partwrt()
 
       if(lplot) call pltend()
@@ -1238,6 +1246,8 @@ c Help section
       write(*,*)' -ver Old verlet integrator.',  
      $     '-bohm Impose Bohm condition when LDe=0.'
       write(*,*)' --fulloutput do not suppress output of large arrays.'
+      write(*,*)' --alloutput write to an hdf file from all nodes.'
+      write(*,*)' --partonly only output particles from slaves.'
       write(*,*)' -sortnnn sort prticles every n steps'
       write(*,*)' -ea indicate end of argument list (if MPI args after)'
 

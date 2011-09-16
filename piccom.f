@@ -9,6 +9,9 @@ c Integrator type. True=old, False=new symplectic schemes
       logical verlet
 c Don't suppress output of large arrays
       logical lfulloutput
+c Make all nodes output to an hdf file (alternatively only particles)
+      logical lalloutput
+      logical lpartonly
 c CIC definitions
       logical LCIC,collcic
       integer NRUSED,NTHUSED,NPSIUSED,NRFULL,NTHFULL,NPSIFULL
@@ -58,7 +61,8 @@ c Whether to calculate average phi at end of last step (phiavg only valid at end
      $     ,Ti,vd,cd,cB,diags,ninjcomp,lplot,ldist,linsulate,lfloat
      $     ,lat0,lap0 ,localinj,lfixedn,myid,numprocs,rmtoz,ipf,iocprev
      $     ,Bz,lsubcycle,verlet,collcic,phiaxis
-     $     ,Bvect,drvect,magdir,ecbdrift,lfulloutput
+     $     ,Bvect,drvect,magdir,ecbdrift,lfulloutput,lalloutput
+     $     ,lpartonly
      $     ,phiavg,lphiavg
 
 
