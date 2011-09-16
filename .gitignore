@@ -25,3 +25,7 @@ sceptic3D
 sceptic3Dhdf
 sceptic3Dmpi
 sceptic3Dmpihdf
+
+# Output files
+*.h5
+*.dat
