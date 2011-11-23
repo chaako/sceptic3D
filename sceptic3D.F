@@ -163,6 +163,7 @@ c     drifting Maxwellian reinjection.
       lfulloutput=.false.
       lalloutput=.false.
       lpartonly=.false.
+      trsiphon=0
       verlet=.false.
       bohm=.false.
 c Signal that fvcom is not initialized. After initialization it is .ne.0
@@ -211,6 +212,8 @@ c        Check for end argument string...required since some MPI versions add th
             lalloutput=.true.
          elseif(string(1:10) .eq. '--partonly')then
             lpartonly=.true.
+         elseif(string(1:10) .eq. '--trsiphon')then
+            read(string(11:),*)trsiphon
          endif
 
          if(string(1:2) .eq. '-f') finaldiags=.false.
@@ -635,6 +638,12 @@ c     Timing
 c Main Stepping loop.
       do i=1,maxsteps
          
+c Set flag for siphoning off trapped particles
+         if (i.lt.(trsiphon*maxsteps)) then
+            ltrsiphon = .true.
+         else
+            ltrsiphon = .false.
+         endif
 
 c Plot at some subset of steps.
 c         write(*,*)mod(i-1,ipstep),i,ipstep
@@ -1248,6 +1257,8 @@ c Help section
       write(*,*)' --fulloutput do not suppress output of large arrays.'
       write(*,*)' --alloutput write to an hdf file from all nodes.'
       write(*,*)' --partonly only output particles from slaves.'
+      write(*,*)' --trsiphon<ddd>(0.) fraction of steps to siphon off',
+     $     ' trapped particles'
       write(*,*)' -sortnnn sort prticles every n steps'
       write(*,*)' -ea indicate end of argument list (if MPI args after)'
 

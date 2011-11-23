@@ -18,6 +18,8 @@ c temp data:
       logical lcollide,lcstep
       real ctc,spsi,cpsi,rad,sd,sB
 
+      logical istrapped
+
 
 c Choose the collision cycle here and set tau appropriately:
 c icycle of 1 costs about 20% extra cf false. (Mostly alog, I'd guess).
@@ -516,6 +518,10 @@ c     Left the grid outer boundary.
                zmout=zmout-xp(6,i)
                xmout=xmout-xp(4,i)
                ymout=ymout-xp(5,i)
+
+c     Siphon off 1% of trapped particles if flag set in sceptic3D.F
+            elseif( ltrsiphon .and. istrapped(i)
+     $          .and. ran0(idum).lt.0.01 ) then
 
 c     Did not leave the grid. Jump to subcycle end.
             else

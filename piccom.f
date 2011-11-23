@@ -57,6 +57,10 @@ c The averaged (over last fraction of total steps) potential
 c Whether to calculate average phi at end of last step (phiavg only valid at end of last step)
       logical lphiavg
 
+c Whether to siphon off trapped particles
+      logical ltrsiphon
+      real trsiphon
+
       common /piccom/xp,npart,vzinit,dtprec,phi,rho,rhoDiag,cerr,bdyfc
      $     ,Ti,vd,cd,cB,diags,ninjcomp,lplot,ldist,linsulate,lfloat
      $     ,lat0,lap0 ,localinj,lfixedn,myid,numprocs,rmtoz,ipf,iocprev
@@ -64,6 +68,7 @@ c Whether to calculate average phi at end of last step (phiavg only valid at end
      $     ,Bvect,drvect,magdir,ecbdrift,lfulloutput,lalloutput
      $     ,lpartonly
      $     ,phiavg,lphiavg
+     $     ,ltrsiphon,trsiphon
 
 
 c *******************************************************************
