@@ -144,6 +144,8 @@ c     Because postcollide selects the velocity and the position at the
 c     same time, we need to set dtprec to zero, in order to offset v and
 c     x by half a time step properly.
                dtprec(i)=0
+c              Set time-step particle collided at
+               ivelreset(i) = step
             endif
             dt=min(dts,remdt)
 
@@ -544,6 +546,8 @@ c              Keep record of injected particles for testing
                   mcrxpinjd(5,mcrninjd) = xp(5,i)
                   mcrxpinjd(6,mcrninjd) = xp(6,i)
                endif
+c              Set time-step particle reinjected at
+               ivelreset(i) = step
 
                ipf(i)=1
                zmout=zmout+xp(6,i)

@@ -59,7 +59,10 @@ c Whether to calculate average phi at end of last step (phiavg only valid at end
 
 c Whether to siphon off trapped particles
       logical ltrsiphon
+c Fraction of time-steps to siphon off trapped particles
       real trsiphon
+c Timestep particle velocity was initialized (by reinjection or coll.)
+      integer ivelreset(npartmax)
 
       common /piccom/xp,npart,vzinit,dtprec,phi,rho,rhoDiag,cerr,bdyfc
      $     ,Ti,vd,cd,cB,diags,ninjcomp,lplot,ldist,linsulate,lfloat
@@ -69,6 +72,7 @@ c Whether to siphon off trapped particles
      $     ,lpartonly
      $     ,phiavg,lphiavg
      $     ,ltrsiphon,trsiphon
+     $     ,ivelreset
 
 
 c *******************************************************************

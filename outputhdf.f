@@ -268,6 +268,14 @@ c     Single value variables
       call writehdfintmat(group_id,dsetname,
      $ lphiavg,storage_dims,data_dims,rank)
 
+      dsetname = 'ltrsiphon'
+      call writehdfintmat(group_id,dsetname,
+     $ ltrsiphon,storage_dims,data_dims,rank)
+
+      dsetname = 'trsiphon'
+      call writehdfrealmat(group_id,dsetname,
+     $ trsiphon,storage_dims,data_dims,rank)
+
 c     Variable arrays
       dsetname = 'xp'
       rank = 2
@@ -277,6 +285,13 @@ c     Variable arrays
       storage_dims(2) = npartmax
       call writehdfrealmat(group_id,dsetname,
      $  xp,storage_dims,data_dims,rank)
+
+      dsetname = 'ivelreset'
+      rank = 1
+      data_dims(1) = npart
+      storage_dims(1) = npartmax
+      call writehdfintmat(group_id,dsetname,
+     $  ivelreset,storage_dims,data_dims,rank)
 
 c Disregard rest if slave and only storing particles
       if (myid.gt.0 .and. lpartonly) goto 999

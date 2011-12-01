@@ -95,6 +95,8 @@ c Default MC injection values
 c Set cout of injected particles to zero
       mcrninjd = 0
       
+c Initialize time-step particle velocities set at
+      data ivelreset/ npartmax * 0 /
 
 c Common defaults. Avoid block data.
       vd=.000
