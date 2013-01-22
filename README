@@ -29,6 +29,8 @@ sceptic3Dprod directory.
 
 `make sceptic3Dmpihdf` builds the parallel version with HDF output.
 
+Note that the command must often be run twice to build accis.
+
 
 
 Running SCEPTIC3D

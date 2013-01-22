@@ -321,9 +321,9 @@ c     Find velocity bins
       ivz = ivz-1
 
 c     Find spatial bins
-      ix = min(nx,max(1,1+(xp(1,i)/rcc(nrused)+1)/2*nx))
-      iy = min(nx,max(1,1+(xp(2,i)/rcc(nrused)+1)/2*ny))
-      iz = min(nx,max(1,1+(xp(3,i)/rcc(nrused)+1)/2*nz))
+      ix = min(nx,max(1,1+int(xp(1,i)/rcc(nrused)+1)/2*nx))
+      iy = min(nx,max(1,1+int(xp(2,i)/rcc(nrused)+1)/2*ny))
+      iz = min(nx,max(1,1+int(xp(3,i)/rcc(nrused)+1)/2*nz))
 
 c     Increment counter for corresponding bin
       vxdistf(ivx,ix,iy,iz) = vxdistf(ivx,ix,iy,iz) + 1;
