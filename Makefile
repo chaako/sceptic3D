@@ -95,7 +95,8 @@ OBJ += orbitinject.o \
 
 # Objects for HDF version of sceptic3D
 OBJHDF := $(OBJ) \
-          outputhdf.o
+          outputhdf.o \
+          readhdf.o
 
 # Objects for MPI version of sceptic3D
 OBJMPI := $(OBJ) \
@@ -123,10 +124,16 @@ sceptic3Dmpi : sceptic3D.F piccom.f errcom.f piccomcg.f $(OBJMPI) ./accis/libacc
 sceptic3Dmpihdf : sceptic3D.F piccom.f errcom.f piccomcg.f $(OBJMPIHDF) ./accis/libaccisX.a
 	$(G77) $(OPTCOMPMPIHDF) -o sceptic3Dmpihdf sceptic3D.F $(OBJMPIHDF) $(LIBHDF)
 
+# interptool with HDF
+interptool : interptool.f piccom.f errcom.f $(OBJHDF) ./accis/libaccisX.a
+	$(G77) $(OPTCOMPHDF) -o interptool interptool.f $(OBJHDF) $(LIBHDF)
+
 
 # HDF related rules
 outputhdf.o : outputhdf.f piccom.f errcom.f colncom.f $(DIRHDF)/lib/libhdf5.a
 	$(G90) -c $(OPTCOMPHDF) outputhdf.f
+readhdf.o : readhdf.f piccom.f errcom.f colncom.f $(DIRHDF)/lib/libhdf5.a
+	$(G90) -c $(OPTCOMPHDF) readhdf.f
 
 # Though more than one hdf library used, choose one as trigger
 $(DIRHDF)/lib/libhdf5.a :
