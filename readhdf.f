@@ -943,7 +943,6 @@ c     Variable arrays
       dsetname = 'fluxprobe'
       rank = 1
       data_dims(1) = maxsteps
-c      storage_dims(1) = maxsteps
       storage_dims(1) = nstepmax
       call readhdfrealmat(group_id,dsetname,
      $  fluxprobe,storage_dims,data_dims,rank)
@@ -1586,8 +1585,6 @@ c Local variables
 c     Hyperslab offset in memory
       INTEGER(HSIZE_T), DIMENSION(10) :: offset =
      $  (/0,0,0,0,0,0,0,0,0,0/)
-c For debugging
-      integer :: i,j
 
 c Open the dataset
       CALL h5dopen_f(group_id, dsetname, dataset_id, error)
@@ -1599,25 +1596,9 @@ c Select hyperslab in memory.
       CALL h5sselect_hyperslab_f(memspace_id, H5S_SELECT_SET_F,
      $  offset, data_dims, error)
 
-c For debugging
-c      error=0
-c      write(*,*) dsetname
-c      write(*,*) dset_data(1)
-c      write(*,*) error
-c      do i=1,400000000
-c        if (i.eq.15400) then
-c          write(*,*) i
-c        endif
-c      enddo
-
-
 c Read the dataset.
       CALL h5dread_f(dataset_id, H5T_NATIVE_REAL, dset_data,
      $  data_dims, error, memspace_id)
-
-c For debugging
-c      write(*,*) dset_data(1)
-c      write(*,*) error
 
 c Close the dataspace.
       CALL h5sclose_f(memspace_id, error)
@@ -1648,8 +1629,6 @@ c Local variables
 c     Hyperslab offset in memory
       INTEGER(HSIZE_T), DIMENSION(10) :: offset =
      $  (/0,0,0,0,0,0,0,0,0,0/)
-c For debugging
-      integer :: i,j
 
 c Open the dataset
       CALL h5dopen_f(group_id, dsetname, dataset_id, error)
@@ -1661,24 +1640,9 @@ c Select hyperslab in memory.
       CALL h5sselect_hyperslab_f(memspace_id, H5S_SELECT_SET_F,
      $  offset, data_dims, error)
 
-c For debugging
-c      error=0
-c      write(*,*) dsetname
-c      write(*,*) dset_data(1)
-c      write(*,*) error
-c      do i=1,400000000
-c        if (i.eq.15400) then
-c          write(*,*) i
-c        endif
-c      enddo
-
 c Read the dataset.
       CALL h5dread_f(dataset_id, H5T_NATIVE_INTEGER, dset_data,
      $  data_dims, error, memspace_id)
-
-c For debugging
-c      write(*,*) dset_data(1)
-c      write(*,*) error
 
 c Close the dataspace.
       CALL h5sclose_f(memspace_id, error)

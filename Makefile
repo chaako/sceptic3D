@@ -96,7 +96,8 @@ OBJ += orbitinject.o \
 # Objects for HDF version of sceptic3D
 OBJHDF := $(OBJ) \
           outputhdf.o \
-          readhdf.o
+          readhdf.o \
+          interpolateFields_sceptic3D.f
 
 # Objects for MPI version of sceptic3D
 OBJMPI := $(OBJ) \
@@ -106,7 +107,8 @@ OBJMPI := $(OBJ) \
 
 # Objects for MPI & HDF version of sceptic3D
 OBJMPIHDF := $(OBJMPI) \
-          outputhdf.o
+          outputhdf.o \
+          readhdf.o
 
 # Default target is serial sceptic3D without HDF support
 sceptic3D : sceptic3D.F piccom.f errcom.f $(OBJ) ./accis/libaccisX.a
