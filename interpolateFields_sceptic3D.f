@@ -28,6 +28,7 @@ c Populate common blocks from hdf file
       call readhdf(dt,k,fave,icolntype,colnwt,filename)
 
 c Find acceleration at points
+c TODO: this only works for nNodes<size(1,xp)
       do i=1,nNodes
          xp(1,i)=x(i)
          xp(2,i)=y(i)
