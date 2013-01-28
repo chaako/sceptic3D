@@ -1,7 +1,7 @@
 c Tool for interpolating field values
       program interptool
 
-      character*155 filename
+      character*100 filename
       integer nNodes
       parameter (nNodes=10)
       double precision x(nNodes),y(nNodes),z(nNodes)
@@ -19,8 +19,8 @@ c      write(*,*) filename
          z(i) = 2.+i/30.
       enddo
 
-      call interpolateFields_sceptic3D(filename,x,y,z,nNodes,
-     $       potential,ax,ay,az)
+      call interpolateFieldsSceptic3D(filename,x,y,z,nNodes,
+     $       potential,ax,ay,az,100)
 
 c For debugging
 c      do i=1,nNodes

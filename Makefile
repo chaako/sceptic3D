@@ -97,7 +97,7 @@ OBJ += orbitinject.o \
 OBJHDF := $(OBJ) \
           outputhdf.o \
           readhdf.o \
-          interpolateFields_sceptic3D.f
+          interpolateFieldsSceptic3D.o
 
 # Objects for MPI version of sceptic3D
 OBJMPI := $(OBJ) \
@@ -129,6 +129,10 @@ sceptic3Dmpihdf : sceptic3D.F piccom.f errcom.f piccomcg.f $(OBJMPIHDF) ./accis/
 # interptool with HDF
 interptool : interptool.f piccom.f errcom.f $(OBJHDF) ./accis/libaccisX.a
 	$(G77) $(OPTCOMPHDF) -o interptool interptool.f $(OBJHDF) $(LIBHDF)
+
+# library with sceptic3Dhdf objects
+libsceptic3Dhdf.a : $(OBJHDF)
+	ar -rs libsceptic3Dhdf.a $(OBJHDF)
 
 
 # HDF related rules
@@ -207,7 +211,7 @@ hdf5-1.8.4.tar.gz : ./tar-1.26/src/tar
 # The following targets will never actually exist
 .PHONY: all distro clean cleandata cleanaccis cleanhdf cleanall ftnchek sceptic3D.tar.gz hdf5-1.8.4.tar.gz
 
-all : sceptic3D sceptic3Dhdf sceptic3Dmpi sceptic3Dmpihdf
+all : sceptic3D sceptic3Dhdf sceptic3Dmpi sceptic3Dmpihdf interptool libsceptic3Dhdf.a
 
 distro : sceptic3D.tar.gz hdf5-1.8.4.tar.gz
 
@@ -220,7 +224,7 @@ clean :
 	-rm *~
 	-rm .*~
 	-rm \#*\#
-	-rm sceptic3D sceptic3Dmpi sceptic3Dhdf sceptic3Dmpihdf
+	-rm sceptic3D sceptic3Dmpi sceptic3Dhdf sceptic3Dmpihdf interptool libsceptic3Dhdf.a
 
 cleandata :
 	-rm *.dat
