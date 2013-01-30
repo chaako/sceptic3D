@@ -786,11 +786,14 @@ c psi sin/cos
       if(pf.lt.0.) then
          write(*,*)"Negative pf from ippre. i,ipl,pcc(ipl),sp,cp,pf="
      $        ,i,ipl,pcc(ipl),sp,cp,pf
-         write(*,*) 'r: ',xp(1,i)**2+xp(2,i)**2+xp(3,i)**2
+         write(*,*) 'r: ',sqrt(xp(1,i)**2+xp(2,i)**2+xp(3,i)**2)
+         write(*,*) 'x y z: ',xp(1,i), xp(2,i), xp(3,i)
+         write(*,*)
       elseif(pf.gt.1.) then
          write(*,*)"pf>1 from ippre. i,ipl,pcc(ipl),sp,cp,pf="
      $        ,i,ipl,pcc(ipl),sp,cp,pf
-         write(*,*) 'r: ',xp(1,i)**2+xp(2,i)**2+xp(3,i)**2
+         write(*,*) 'r: ',sqrt(xp(1,i)**2+xp(2,i)**2+xp(3,i)**2)
+         write(*,*) 'x y z: ',xp(1,i), xp(2,i), xp(3,i)
          write(*,*)
       endif
       

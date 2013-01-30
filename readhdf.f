@@ -622,7 +622,7 @@ c     Variable arrays
 
       dsetname = 'pcc'
       rank = 1
-      data_dims(1) = npsi+1
+      data_dims(1) = NPSIFULL+1
       storage_dims(1) = npsisize+1
       call readhdfrealmat(group_id,dsetname,
      $  pcc,storage_dims,data_dims,rank)
@@ -636,21 +636,21 @@ c     Variable arrays
 
       dsetname = 'irpre'
       rank = 1
-      data_dims(1) = 4*nr
+      data_dims(1) = nrpre
       storage_dims(1) = nrpre
       call readhdfintmat(group_id,dsetname,
      $  irpre,storage_dims,data_dims,rank)
 
       dsetname = 'itpre'
       rank = 1
-      data_dims(1) = 4*nth
+      data_dims(1) = ntpre
       storage_dims(1) = ntpre
       call readhdfintmat(group_id,dsetname,
      $  itpre,storage_dims,data_dims,rank)
 
       dsetname = 'ippre'
       rank = 1
-      data_dims(1) = 4*npsi
+      data_dims(1) = nppre
       storage_dims(1) = nppre
       call readhdfintmat(group_id,dsetname,
      $  ippre,storage_dims,data_dims,rank)
