@@ -1,6 +1,6 @@
 c Tool for interpolating field values
       subroutine interpolateFieldsSceptic3D(filename,x,y,z,nNodes,
-     $             potential,ax,ay,az,filenameLength)
+     $             potential,ax,ay,az,density,filenameLength)
 
 c Input variables
       character*155 filename
@@ -8,7 +8,7 @@ c Input variables
       integer nNodes
       integer filenameLength
 c Output variables
-      double precision potential(*),ax(*),ay(*),az(*)
+      double precision potential(*),ax(*),ay(*),az(*),density(*)
 
 c Non-commonblock variables in hdf file
       real dt, fave, colnwt
@@ -51,6 +51,9 @@ c        Potential interpolation from istrapped()
          potential(i)=
      $        (phi(il,ith,ipl)*(1.-tf)+phi(il,ith+1,ipl)*tf)*(1.-rf) +
      $        (phi(il+1,ith,ipl)*(1.-tf)+phi(il+1,ith+1,ipl)*tf)*rf
+         density(i)=
+     $        (rho(il,ith,ipl)*(1.-tf)+rho(il,ith+1,ipl)*tf)*(1.-rf) +
+     $        (rho(il+1,ith,ipl)*(1.-tf)+rho(il+1,ith+1,ipl)*tf)*rf
          call getaccel(1,accel,il,rf,ith,tf,ipl,pf,st,ct,
      $        sp,cp,rp,zetap,ih,hf)
          ax(i)=accel(1)
