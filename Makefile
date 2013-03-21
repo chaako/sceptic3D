@@ -12,6 +12,7 @@ NUMPROC := 8
 # Set compilers
 G77 := $(shell ./setcomp f77)
 G77nonmpi := $(shell ./setcomp f77 nonmpi)
+F77 := $(G77)
 G90 := $(shell ./setcomp f90)
 G90nonmpi := $(shell ./setcomp f90 nonmpi)
 
