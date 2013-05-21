@@ -52,8 +52,10 @@ c        Potential interpolation from istrapped()
      $        (phi(il,ith,ipl)*(1.-tf)+phi(il,ith+1,ipl)*tf)*(1.-rf) +
      $        (phi(il+1,ith,ipl)*(1.-tf)+phi(il+1,ith+1,ipl)*tf)*rf
          density(i)=
-     $        (rho(il,ith,ipl)*(1.-tf)+rho(il,ith+1,ipl)*tf)*(1.-rf) +
-     $        (rho(il+1,ith,ipl)*(1.-tf)+rho(il+1,ith+1,ipl)*tf)*rf
+     $        (rhoDiag(il,ith,ipl)*(1.-tf)+
+     $         rhoDiag(il,ith+1,ipl)*tf)*(1.-rf) +
+     $        (rhoDiag(il+1,ith,ipl)*(1.-tf)+
+     $         rhoDiag(il+1,ith+1,ipl)*tf)*rf
          call getaccel(1,accel,il,rf,ith,tf,ipl,pf,st,ct,
      $        sp,cp,rp,zetap,ih,hf)
          ax(i)=accel(1)
